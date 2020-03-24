@@ -2,9 +2,9 @@
 
 ## Overview
 
-React and Redux together with Material UI as the UI framework form the front end of the application.
+The foundation of the frontend for this application are React and Redux together with Material UI as the UI framework.
 
-Firebase is used as a flexible and scalable backend. Cloud functions serve as REST interface, which provides access to user authentication, storage and the database.
+Firebase is used as a flexible and scalable backend. Cloud functions serve as a REST interface, which provides access to user authentication, storage and the database.
 
 ![Overview](Screenshots/overview.png "Overview")
 
