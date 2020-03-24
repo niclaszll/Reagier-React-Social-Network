@@ -20,6 +20,10 @@ const styles = theme => ({
     overflow: 'hidden',
     height: '75px',
     position: 'relative',
+    '@media (max-width: 600px)': {
+      width: '45px',
+      height: '45px',
+    },
   },
   commentImage: {
     width: '100%',
@@ -36,7 +40,12 @@ const styles = theme => ({
   comment: {
     borderTop: '2px solid #e9ecf0',
     padding: 20,
-    margin: '0 20px 0 20px',
+    margin: '0 20px',
+    width: '100%',
+    '@media (max-width: 600px)': {
+      margin: 0,
+      padding: '20px 5px',
+    },
   },
 })
 

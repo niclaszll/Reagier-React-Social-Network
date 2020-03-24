@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
-import Grid from '@material-ui/core/Grid'
+import withStyles from '@material-ui/core/styles/withStyles'
 import { connect } from 'react-redux'
+
+import Grid from '@material-ui/core/Grid'
 import Post from '../components/post/Post'
 import StaticProfile from '../components/profile/StaticProfile'
 import PostSkeleton from '../util/PostSkeleton'
@@ -10,6 +12,10 @@ import ProfileSkeleton from '../util/ProfileSkeleton'
 
 // Redux
 import { getUserData } from '../redux/actions/dataActions'
+
+const styles = theme => ({
+  ...theme.cssStyles,
+})
 
 class user extends Component {
   state = {
@@ -47,7 +53,10 @@ class user extends Component {
   }
 
   render() {
-    const { posts, loading } = this.props.data
+    const {
+      classes,
+      data: { posts, loading },
+    } = this.props
     const { postIdParam } = this.state
 
     let postsMarkup
@@ -69,10 +78,10 @@ class user extends Component {
 
     return (
       <Grid container spacing={3}>
-        <Grid item sm={8} xs={12}>
+        <Grid item className={classes.postContainer}>
           {postsMarkup}
         </Grid>
-        <Grid item sm={4} xs={12}>
+        <Grid item className={classes.userProfileContainer}>
           {this.state.profile === null ? <ProfileSkeleton /> : <StaticProfile profile={this.state.profile} />}
         </Grid>
       </Grid>
@@ -84,10 +93,11 @@ user.propTypes = {
   getUserData: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
   data: state.data,
 })
 
-export default connect(mapStateToProps, { getUserData })(user)
+export default connect(mapStateToProps, { getUserData })(withStyles(styles)(user))

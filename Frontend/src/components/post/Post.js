@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles'
 import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import PropTypes from 'prop-types'
+import Media from 'react-media'
 
 // MUI
 import { Typography } from '@material-ui/core'
@@ -44,6 +45,10 @@ const styles = {
     height: '120px',
     position: 'relative',
     flex: '0 0 auto',
+    '@media (max-width: 600px)': {
+      minWidth: '40px',
+      height: '40px',
+    },
   },
   image: {
     width: '100%',
@@ -57,15 +62,28 @@ const styles = {
     width: '100%',
     display: 'flex',
     alignItems: 'center',
+    '@media (max-width: 600px)': {
+      flexWrap: 'wrap',
+    },
   },
   textContent: {
     padding: '0 30px 0 40px',
+  },
+  textContentUpper: {
+    padding: '0 20px',
+  },
+  textContentBody: {
+    marginTop: 16,
+    width: '100%',
   },
   controlsContent: {
     marginLeft: 148,
     width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
+    '@media (max-width: 600px)': {
+      marginLeft: 0,
+    },
     '& .main-controls': {
       display: 'flex',
       width: '100%',
@@ -80,6 +98,9 @@ const styles = {
     backgroundColor: '#E9ECF0',
     display: 'block',
     margin: '0 0 8px 160px',
+    '@media (max-width: 600px)': {
+      margin: '0 0 8px 0',
+    },
   },
 }
 
@@ -131,6 +152,58 @@ class Post extends Component {
       authenticated && userHandle === handle ? (
         <DeletePost postId={postId} onClick={event => event.stopPropagation()} onFocus={event => event.stopPropagation()} />
       ) : null
+
+    const mainContent = (
+      <Media
+        queries={{
+          small: '(max-width: 600px)',
+          large: '(min-width: 601px)',
+        }}
+      >
+        {matches => (
+          <Fragment>
+            {matches.small && (
+              <Fragment>
+                <div className={classes.imageWrapper}>
+                  <img className={classes.image} src={userImage} alt="Profile" title="Profile image" />
+                </div>
+                <div className={classes.textContentUpper}>
+                  <Typography variant="h5" component={Link} to={`/users/${userHandle}`} color="primary">
+                    {userHandle}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    {dayjs(createdAt).fromNow()}
+                  </Typography>
+                </div>
+                <div className={classes.textContentBody}>
+                  <Typography variant="body1" color="textPrimary">
+                    {body}
+                  </Typography>
+                </div>
+              </Fragment>
+            )}
+            {matches.large && (
+              <Fragment>
+                <div className={classes.imageWrapper}>
+                  <img className={classes.image} src={userImage} alt="Profile" title="Profile image" />
+                </div>
+                <div className={classes.textContent}>
+                  <Typography variant="h5" component={Link} to={`/users/${userHandle}`} color="primary">
+                    {userHandle}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    {dayjs(createdAt).fromNow()}
+                  </Typography>
+                  <Typography variant="body1" color="textPrimary">
+                    {body}
+                  </Typography>
+                </div>
+              </Fragment>
+            )}
+          </Fragment>
+        )}
+      </Media>
+    )
     return (
       <ExpansionPanel
         className={classes.expansionPanel}
@@ -140,22 +213,7 @@ class Post extends Component {
       >
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls={`panel-${index}-content`} id={`panel-${index}-header`}>
           <div className={classes.contentContainer}>
-            <div className={classes.mainContent}>
-              <div className={classes.imageWrapper}>
-                <img className={classes.image} src={userImage} alt="Profile" title="Profile image" />
-              </div>
-              <div className={classes.textContent}>
-                <Typography variant="h5" component={Link} to={`/users/${userHandle}`} color="primary">
-                  {userHandle}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  {dayjs(createdAt).fromNow()}
-                </Typography>
-                <Typography variant="body1" color="textPrimary">
-                  {body}
-                </Typography>
-              </div>
-            </div>
+            <div className={classes.mainContent}>{mainContent}</div>
             <span className={classes.visibleSeparator} />
             <div className={classes.controlsContent}>
               <div className="main-controls">

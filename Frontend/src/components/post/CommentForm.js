@@ -13,15 +13,25 @@ import { submitComment } from '../../redux/actions/dataActions'
 
 const styles = theme => ({
   ...theme.cssStyles,
+  formContainer: {
+    textAlign: 'center',
+    width: '100%',
+  },
   commentForm: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '0 20px 25px 20px',
+    '@media (max-width: 600px)': {
+      padding: '0 0 15px 0',
+    },
   },
   textField: {
     flexGrow: 1,
     marginRight: 30,
+    '@media (max-width: 600px)': {
+      marginRight: 15,
+    },
   },
   button: {
     margin: 0,
@@ -58,7 +68,7 @@ class CommentForm extends Component {
     const { classes, authenticated } = this.props
     const { errors, body } = this.state
     const commentFormMarkup = authenticated ? (
-      <Grid item sm={12} style={{ textAlign: 'center' }}>
+      <Grid item className={classes.formContainer}>
         <form className={classes.commentForm} onSubmit={this.handleSubmit}>
           <TextField
             name="body"

@@ -8,6 +8,34 @@ export default {
     },
   },
   cssStyles: {
+    postContainer: {
+      flexGrow: 0,
+      maxWidth: '66.666667%',
+      flexBasis: '66.666667%',
+      '@media (max-width: 1150px)': {
+        maxWidth: '60%',
+        flexBasis: '60%',
+      },
+      '@media (max-width: 950px)': {
+        maxWidth: '100%',
+        flexBasis: '100%',
+        order: 2,
+      },
+    },
+    userProfileContainer: {
+      flexGrow: 0,
+      maxWidth: '33.333333%',
+      flexBasis: '33.333333%',
+      '@media (max-width: 1150px)': {
+        maxWidth: '40%',
+        flexBasis: '40%',
+      },
+      '@media (max-width: 950px)': {
+        maxWidth: '100%',
+        flexBasis: '100%',
+        order: 1,
+      },
+    },
     typography: {
       useNextVariants: true,
     },
