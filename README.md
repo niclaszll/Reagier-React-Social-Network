@@ -2,9 +2,9 @@
 
 ## Overview
 
-React and Redux together with Material UI as the UI framework form the front end of the application.
+The foundation of the frontend for this application are React and Redux together with Material UI as the UI framework.
 
-Firebase is used as a flexible and scalable backend. Cloud functions serve as REST interface, which provides access to user authentication, storage and the database.
+Firebase is used as a flexible and scalable backend. Cloud functions serve as a REST interface, which provides access to user authentication, storage and the database.
 
 ![Overview](Screenshots/overview.png "Overview")
 
@@ -20,7 +20,7 @@ Firebase is used as a flexible and scalable backend. Cloud functions serve as RE
 4. Edit [.firebaserc](Firebase/.firebaserc) and [config.js](Firebase/functions/util/config.js) to match your Firebase config ([How to download Firebase config file](https://support.google.com/firebase/answer/7015592?hl=en))
 5. Deploy to Firebase via [Firebase CLI](https://firebase.google.com/docs/cli) with `firebase deploy`
 
-Should problems occur, a local project can alternatively be initialized via Firebase CLI first. Then simply insert the folders _handlers_ and _util_, as well as the _index.js_ as _package.json_. More info in the [Firebase CLI Docs](https://firebase.google.com/docs/cli).
+Should problems occur, a local project can alternatively be initialized via Firebase CLI first. Then simply insert the folders _handlers_ and _util_, as well as the _index.js_ and _package.json_. More info in the [Firebase CLI Docs](https://firebase.google.com/docs/cli).
 
 ### Frontend
 
